@@ -1,7 +1,7 @@
-﻿using NPos.Application.Model;
-using NPos.Inventory.Model;
+﻿using NPos.Inventory.Model;
+using NPos.Inventory.Queries;
 
-namespace NPos.Application.Service
+namespace NPos.Inventory.Abstraction.Service
 {
     public interface IInventoryService
     {

@@ -1,10 +1,10 @@
-﻿using NPos.Application.Model;
-using NPos.Application.Repository;
-using NPos.Application.Service;
+﻿using NPos.Inventory.Abstraction.Repository;
+using NPos.Inventory.Abstraction.Service;
 using NPos.Inventory.Exceptions;
 using NPos.Inventory.Model;
+using NPos.Inventory.Queries;
 
-namespace NPos.Infrastructure.Service
+namespace NPos.Application.Service
 {
     public class InventoryService(
         IProductRepository productRepository,
