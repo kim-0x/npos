@@ -1,11 +1,27 @@
-﻿namespace NPos.Inventory.Model
+﻿using NPos.Inventory.Exception;
+
+namespace NPos.Inventory.Model
 {
     public class Product : IComparable<Product>
     {
+        private ProductCategory? _category;
+
         public Guid Id { get; set; }
         public string Barcode { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
-        public string? Category { get; set; }
+        
+        public ProductCategory? Category 
+        {
+            get { return _category; }
+            set
+            {
+                if (value is null)
+                {
+                    throw new InvalidCategoryException(value);
+                }
+                _category = value;
+            }
+        }
         public int CompareTo(Product? other)
         {
             if (other is null) return 1;
