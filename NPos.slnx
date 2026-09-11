@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="src/NPos.Application/NPos.Application.csproj" Id="993515eb-a646-46a0-8343-393a1ec756be" />
+  <Project Path="src/NPos.Infrastructure/NPos.Infrastructure.csproj" Id="dcda16d4-f920-4421-873b-d974b39853cd" />
   <Project Path="src/NPos.Inventory/NPos.Inventory.csproj" Id="b27b65d1-579d-4820-9115-1dd8b1900b4f" />
 </Solution>
