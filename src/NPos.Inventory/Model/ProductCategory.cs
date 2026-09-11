@@ -1,4 +1,6 @@
-﻿namespace NPos.Inventory.Model
+﻿using NPos.Inventory.Exception;
+
+namespace NPos.Inventory.Model
 {
     public sealed class ProductCategory
     {
@@ -33,7 +35,7 @@
                 }
             }
 
-            throw new ArgumentException($"Unknown category: '{value}'");
+            throw new InvalidCategoryException(value);
         }
 
         public override string ToString()
