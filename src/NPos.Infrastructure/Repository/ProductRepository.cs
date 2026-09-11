@@ -44,7 +44,7 @@ namespace NPos.Infrastructure.Repository
         {
             if (product.Category is null)
             {
-                nPosContext.Products.Add(new Entity.Product
+                nPosContext.Products.Add(new()
                 {
                     Id = product.Id,
                     Barcode = product.Barcode,
@@ -58,12 +58,12 @@ namespace NPos.Infrastructure.Repository
                     .Where(c => c.Name.ToLower() == product.Category.ToString())
                     .FirstOrDefaultAsync();
 
-                nPosContext.Products.Add(new Entity.Product
+                nPosContext.Products.Add(new()
                 {
                     Id = product.Id,
                     Barcode = product.Barcode,
                     Name = product.Name,
-                    Category = new Entity.Category
+                    Category = new()
                     {
                         Id = category?.Id ?? 0,
                         Name = product.Category.ToString()
