@@ -1,13 +1,12 @@
-﻿namespace NPos.Inventory.Exception
-{
-    using System;
-    using NPos.Inventory.Model;
+﻿using NPos.Inventory.Model;
 
+namespace NPos.Inventory.Exceptions
+{
     public class InvalidCategoryException : Exception
     {
-        public InvalidCategoryException(string category) 
-            : base($"Invalid category: '{category}'") 
-        { 
+        public InvalidCategoryException(string category)
+            : base($"Invalid category: '{category}'")
+        {
         }
 
         public InvalidCategoryException(ProductCategory? category)

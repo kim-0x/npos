@@ -1,4 +1,4 @@
-﻿using NPos.Inventory.Exception;
+﻿using NPos.Inventory.Exceptions;
 
 namespace NPos.Inventory.Model
 {

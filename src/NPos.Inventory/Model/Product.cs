@@ -1,4 +1,4 @@
-﻿using NPos.Inventory.Exception;
+﻿using NPos.Inventory.Exceptions;
 
 namespace NPos.Inventory.Model
 {
@@ -9,8 +9,8 @@ namespace NPos.Inventory.Model
         public Guid Id { get; set; }
         public string Barcode { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
-        
-        public ProductCategory? Category 
+
+        public ProductCategory? Category
         {
             get { return _category; }
             set
