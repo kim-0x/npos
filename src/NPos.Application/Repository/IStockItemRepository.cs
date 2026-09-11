@@ -6,7 +6,7 @@ namespace NPos.Application.Repository
     {
         Task<StockItem[]> GetStockItemsByProductId(Guid productId);
         Task<double> GetCurrentStockLevelByProductId(Guid productId);
-        Task<decimal> GetLatestStockPriceByProductId(Guid productId);
+        Task<decimal> GetLatestItemCostById(Guid productId);
         Task SaveStockItem(StockItem stockItem);
     }
 }

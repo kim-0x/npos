@@ -41,7 +41,7 @@ namespace NPos.Inventory.Model
             return currentStock <= LowStockLevel;
         }
 
-        public decimal GetLatestStockPrice(Guid productId)
+        public decimal GetLatestItemCost(Guid productId)
         {
             var latestStockItem = GetStockItem(productId)
                 .Where(s => s.NumberInStock > 0) // Get only stock in
