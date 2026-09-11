@@ -1,4 +1,6 @@
-﻿namespace NPos.Inventory.Model
+﻿using NPos.Inventory.Exceptions;
+
+namespace NPos.Inventory.Model
 {
     public class Inventory
     {
@@ -8,7 +10,14 @@
 
         public StockItem[] GetStockItem(Guid productId)
         {
-            return [.. _stockItems.Where(s => s.ProductId == productId)];
+            var result = _stockItems.Where(s => s.ProductId == productId);
+
+            if (!result.Any())
+            {
+                throw new ProductNotFoundException(productId);
+            }
+
+            return [.. result];
         }
 
         public StockItem[] GetStockItems()
@@ -23,9 +32,7 @@
                 return 0.0;
             }
 
-            return _stockItems
-                .Where(s => s.ProductId == productId)
-                .Sum(s => s.NumberInStock);
+            return GetStockItem(productId).Sum(s => s.NumberInStock);
         }
 
         public bool IsLowStockLevel(Guid productId)
