@@ -7,6 +7,11 @@
         {
         }
 
+        public ProductNotFoundException(string message)
+            : base(message)
+        {
+        }
+
         public ProductNotFoundException(string message, Exception exception)
             : base(message, exception)
         {
