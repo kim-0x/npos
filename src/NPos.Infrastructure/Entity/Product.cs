@@ -6,6 +6,6 @@
         public string Barcode { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public int CategoryId { get; set; }
-        public Category Category { get; set; } = new();
+        public Category? Category { get; set; }
     }
 }

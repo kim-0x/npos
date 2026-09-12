@@ -58,17 +58,30 @@ namespace NPos.Infrastructure.Repository
                     .Where(c => c.Name.ToLower() == product.Category.ToString())
                     .FirstOrDefaultAsync();
 
-                nPosContext.Products.Add(new()
+                if (category is null)
                 {
-                    Id = product.Id,
-                    Barcode = product.Barcode,
-                    Name = product.Name,
-                    Category = new()
+                    nPosContext.Products.Add(new()
                     {
-                        Id = category?.Id ?? 0,
-                        Name = product.Category.ToString()
-                    }
-                });
+                        Id = product.Id,
+                        Barcode = product.Barcode,
+                        Name = product.Name,
+                        Category = new()
+                        {
+                            Id = category?.Id ?? 0,
+                            Name = product.Category.ToString()
+                        }
+                    });
+                }
+                else
+                {
+                    nPosContext.Products.Add(new()
+                    {
+                        Id = product.Id,
+                        Barcode = product.Barcode,
+                        Name = product.Name,
+                        CategoryId = category.Id
+                    });
+                }
             }
 
             await nPosContext.SaveChangesAsync();

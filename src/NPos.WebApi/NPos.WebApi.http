@@ -1,8 +1,9 @@
 @NPos.WebApi_HostAddress = http://localhost:5045
 
-GET {{NPos.WebApi_HostAddress}}/api/products
+POST {{NPos.WebApi_HostAddress}}/api/products
+Content-Type: application/json
 Accept: application/json
-Data: 
+
 {
   "barcode": "051000012347",
   "name": "Raspberries",
