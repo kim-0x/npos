@@ -8,5 +8,15 @@ namespace NPos.Infrastructure.Persistence
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<StockItem> StockItems { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<StockItem>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Cost)
+                    .HasPrecision(18, 2);
+            });
+        }
     }
 }
