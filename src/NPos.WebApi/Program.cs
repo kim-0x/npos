@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using NPos.Application.Service;
 using NPos.Infrastructure.Persistence;
+using NPos.Infrastructure.Repository;
+using NPos.Inventory.Abstraction.Repository;
+using NPos.Inventory.Abstraction.Service;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +18,10 @@ builder.Services.AddDbContext<NPosContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IStockItemRepository, StockItemRepository>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
 
 var app = builder.Build();
 
