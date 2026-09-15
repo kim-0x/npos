@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NPos.Inventory.Abstraction.Service;
 using NPos.Inventory.Exceptions;
+using NPos.WebApi.Models;
 
 namespace NPos.WebApi.Controllers
 {
@@ -9,16 +10,16 @@ namespace NPos.WebApi.Controllers
     public class ProductsController(IInventoryService inventoryService) : ControllerBase
     {
         [HttpPost]
-        public async Task<IResult> Create(ProductRecord product)
+        public async Task<IResult> Create(ProductModel productModel)
         {
             try
             {
-                if (product is null)
+                if (productModel is null)
                 {
                     return Results.BadRequest("Product cannot be null.");
                 }
 
-                await inventoryService.CreateNewProduct(product.barcode, product.name, product.category);
+                await inventoryService.CreateNewProduct(productModel.Barcode, productModel.Name, productModel.Category);
                 return Results.Ok("Product is created");
             }
             catch (InvalidCategoryException ex)
