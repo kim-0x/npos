@@ -10,16 +10,9 @@ namespace NPos.Application.Service
         IProductRepository productRepository,
         IStockItemRepository stockItemRepository) : IInventoryService
     {
-        public async Task CreateNewProduct(string barcode, string name, ProductCategory category)
+        public async Task CreateNewProduct(string barcode, string name, string categoryName)
         {
-            Product product = new()
-            {
-                Barcode = barcode,
-                Name = name,
-                Category = category
-            };
-
-            await productRepository.SaveProduct(product);
+            throw new NotImplementedException();
         }
 
         public async Task<decimal> GetProductCostBy(ProductQuery query)

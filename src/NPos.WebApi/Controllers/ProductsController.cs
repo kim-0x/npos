@@ -15,7 +15,7 @@ namespace NPos.WebApi.Controllers
                 return Results.BadRequest("Product cannot be null.");
             }
 
-            await inventoryService.CreateNewProduct(product.barcode, product.name, Inventory.Model.ProductCategory.FromString(product.category));
+            await inventoryService.CreateNewProduct(product.barcode, product.name, product.category);
             return Results.Ok("Product is created");
         }
     }

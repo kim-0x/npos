@@ -10,7 +10,7 @@ namespace NPos.Inventory.Exceptions
         }
 
         public InvalidCategoryException(ProductCategory? category)
-            : base((category is null) ? "Category is null exception." : $"Invalid category: '{category.Value}'")
+            : base((category is null) ? "Category is null exception." : $"Invalid category: '{category.Name}'")
         {
         }
 

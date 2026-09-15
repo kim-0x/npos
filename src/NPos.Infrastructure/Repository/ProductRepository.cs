@@ -19,7 +19,11 @@ namespace NPos.Infrastructure.Repository
                      Id = p.Id,
                      Barcode = p.Barcode,
                      Name = p.Name,
-                     Category = ProductCategory.FromString(p.Category.Name)
+                     Category = new()
+                     {
+                         Id = p.Category.Id,
+                         Name = p.Category.Name
+                     }
                  })
                  .FirstOrDefaultAsync();
         }
@@ -35,7 +39,11 @@ namespace NPos.Infrastructure.Repository
                     Id = p.Id,
                     Barcode = p.Barcode,
                     Name = p.Name,
-                    Category = ProductCategory.FromString(p.Category.Name)
+                    Category = new()
+                    {
+                        Id = p.Category.Id,
+                        Name = p.Category.Name
+                    }
                 })
                 .ToArrayAsync();
         }
@@ -55,7 +63,7 @@ namespace NPos.Infrastructure.Repository
             {
                 var category = await nPosContext.Categories
                     .AsNoTracking()
-                    .Where(c => c.Name.ToLower() == product.Category.ToString())
+                    .Where(c => c.Name.ToLower() == product.Category.Name)
                     .FirstOrDefaultAsync();
 
                 if (category is null)
@@ -68,7 +76,7 @@ namespace NPos.Infrastructure.Repository
                         Category = new()
                         {
                             Id = category?.Id ?? 0,
-                            Name = product.Category.ToString()
+                            Name = product.Category.Name
                         }
                     });
                 }
