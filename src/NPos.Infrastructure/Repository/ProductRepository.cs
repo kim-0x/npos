@@ -63,46 +63,26 @@ namespace NPos.Infrastructure.Repository
 
         public async Task SaveProduct(Product product)
         {
-            if (product.Category is null)
+            if (product.Category.Id == default)
             {
                 nPosContext.Products.Add(new()
                 {
-                    Id = product.Id,
                     Barcode = product.Barcode,
                     Name = product.Name,
+                    Category = new()
+                    {
+                        Name = product.Category.Name
+                    }
                 });
             }
             else
             {
-                var category = await nPosContext.Categories
-                    .AsNoTracking()
-                    .Where(c => c.Name.ToLower() == product.Category.Name)
-                    .FirstOrDefaultAsync();
-
-                if (category is null)
+                nPosContext.Products.Add(new()
                 {
-                    nPosContext.Products.Add(new()
-                    {
-                        Id = product.Id,
-                        Barcode = product.Barcode,
-                        Name = product.Name,
-                        Category = new()
-                        {
-                            Id = category?.Id ?? 0,
-                            Name = product.Category.Name
-                        }
-                    });
-                }
-                else
-                {
-                    nPosContext.Products.Add(new()
-                    {
-                        Id = product.Id,
-                        Barcode = product.Barcode,
-                        Name = product.Name,
-                        CategoryId = category.Id
-                    });
-                }
+                    Barcode = product.Barcode,
+                    Name = product.Name,
+                    CategoryId = product.Category.Id
+                });
             }
 
             await nPosContext.SaveChangesAsync();

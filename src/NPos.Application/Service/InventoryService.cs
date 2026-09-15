@@ -12,7 +12,21 @@ namespace NPos.Application.Service
     {
         public async Task CreateNewProduct(string barcode, string name, string categoryName)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(categoryName) || string.IsNullOrWhiteSpace(categoryName))
+            {
+                throw new InvalidCategoryException(categoryName);
+            }
+
+            var category = await productRepository.GetCategoryBy(categoryName);
+
+            Product product = new()
+            {
+                Barcode = barcode,
+                Name = name,
+                Category = (category is not null) ? category : new ProductCategory { Name = categoryName },
+            };
+
+            await productRepository.SaveProduct(product);
         }
 
         public async Task<decimal> GetProductCostBy(ProductQuery query)
