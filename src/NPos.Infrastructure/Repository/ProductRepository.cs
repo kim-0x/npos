@@ -8,6 +8,19 @@ namespace NPos.Infrastructure.Repository
 {
     public class ProductRepository(NPosContext nPosContext) : IProductRepository
     {
+        public async Task<ProductCategory?> GetCategoryBy(string name)
+        {
+            return await nPosContext.Categories
+                    .AsNoTracking()
+                    .Where(c => c.Name.ToLower() == name.ToLower())
+                    .Select(c => new ProductCategory
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    })
+                    .FirstOrDefaultAsync();
+        }
+
         public async Task<Product?> GetProductBy(ProductQuery query)
         {
             return await nPosContext.Products
