@@ -1,4 +1,4 @@
-﻿namespace NPos.Inventory.Queries
+﻿namespace NPos.Application.Queries
 {
     public record ProductQuery(Guid? Id, string Barcode);
 }

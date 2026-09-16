@@ -1,8 +1,8 @@
-﻿using NPos.Application.Abstraction;
-using NPos.Inventory.Abstraction.Repository;
+﻿using NPos.Application.Abstraction.Repository;
+using NPos.Application.Abstraction.Service;
+using NPos.Application.Queries;
 using NPos.Inventory.Exceptions;
 using NPos.Inventory.Model;
-using NPos.Inventory.Queries;
 
 namespace NPos.Application.Service
 {

@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using NPos.Application.Abstraction;
+using NPos.Application.Abstraction.Repository;
+using NPos.Application.Abstraction.Service;
 using NPos.Application.Service;
 using NPos.Infrastructure.Persistence;
 using NPos.Infrastructure.Repository;
-using NPos.Inventory.Abstraction.Repository;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);

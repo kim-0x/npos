@@ -1,7 +1,7 @@
-﻿using NPos.Inventory.Model;
-using NPos.Inventory.Queries;
+﻿using NPos.Application.Queries;
+using NPos.Inventory.Model;
 
-namespace NPos.Inventory.Abstraction.Repository
+namespace NPos.Application.Abstraction.Repository
 {
     public interface IProductRepository
     {

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using NPos.Application.Abstraction;
+using NPos.Application.Abstraction.Service;
 using NPos.Inventory.Exceptions;
 using NPos.WebApi.Dtos;
 

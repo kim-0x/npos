@@ -1,6 +1,6 @@
 ﻿using NPos.Inventory.Model;
 
-namespace NPos.Inventory.Abstraction.Repository
+namespace NPos.Application.Abstraction.Repository
 {
     public interface IStockItemRepository
     {

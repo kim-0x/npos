@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NPos.Application.Abstraction.Repository;
+using NPos.Application.Queries;
 using NPos.Infrastructure.Persistence;
-using NPos.Inventory.Abstraction.Repository;
 using NPos.Inventory.Model;
-using NPos.Inventory.Queries;
 
 using ProductEntity = NPos.Infrastructure.Entity.Product;
 
