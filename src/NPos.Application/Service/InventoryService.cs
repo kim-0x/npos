@@ -1,5 +1,7 @@
 ﻿using NPos.Application.Abstraction.Repository;
 using NPos.Application.Abstraction.Service;
+using NPos.Application.Commands;
+using NPos.Application.Dtos;
 using NPos.Application.Queries;
 using NPos.Inventory.Exceptions;
 using NPos.Inventory.Model;
@@ -10,23 +12,31 @@ namespace NPos.Application.Service
         IProductRepository productRepository,
         IStockItemRepository stockItemRepository) : IInventoryService
     {
-        public async Task CreateNewProduct(string barcode, string name, string categoryName)
+        public async Task<ProductDto> CreateNewProduct(CreateProductCommand command)
         {
-            if (string.IsNullOrEmpty(categoryName) || string.IsNullOrWhiteSpace(categoryName))
+            if (string.IsNullOrEmpty(command.CategoryName) || string.IsNullOrWhiteSpace(command.CategoryName))
             {
-                throw new InvalidCategoryException(categoryName);
+                throw new InvalidCategoryException(command.CategoryName);
             }
 
-            var category = await productRepository.GetCategoryBy(categoryName);
+            var category = await productRepository.GetCategoryBy(command.CategoryName);
 
             Product product = new()
             {
-                Barcode = barcode,
-                Name = name,
-                Category = (category is not null) ? category : new ProductCategory { Name = categoryName },
+                Barcode = command.Barcode,
+                Name = command.Name,
+                Category = (category is not null) ? category : new ProductCategory { Name = command.CategoryName },
             };
 
-            await productRepository.SaveProduct(product);
+            var result = await productRepository.SaveProduct(product);
+
+            return new ProductDto
+            {
+                Id = result.Id,
+                Barcode = result.Barcode,
+                Name = result.Name,
+                Category = result.Category.Name
+            };
         }
 
         public async Task<decimal> GetProductCostBy(ProductQuery query)

@@ -7,7 +7,7 @@ Accept: application/json
 {
   "barcode": "051000012347",
   "name": "Raspberries",
-  "category": "fruit"
+  "categoryName": "fruit"
 }
 ###
 
@@ -18,7 +18,7 @@ Accept: application/json
 {
   "barcode": "012320012347",
   "name": "Gold Pan Brown Sugar & Cracked Pepper Rubbed Salmon, Ready to Cook",
-  "category": "seafood"
+  "categoryName": "seafood"
 }
 ###
 
@@ -29,6 +29,16 @@ Accept: application/json
 {
   "barcode": "180351000399",
   "name": "Cookie Dough Brownies",
-  "category": ""
+  "categoryName": ""
+}
+###
+
+POST {{NPos.WebApi_HostAddress}}/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+  "barcode": "180351000399",
+  "name": "Cookie Dough Brownies"
 }
 ###

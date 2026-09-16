@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using NPos.Application.Abstraction.Service;
+using NPos.Application.Commands;
+using NPos.Application.Dtos;
 using NPos.Inventory.Exceptions;
-using NPos.WebApi.Dtos;
 
 namespace NPos.WebApi.Controllers
 {
@@ -10,16 +11,16 @@ namespace NPos.WebApi.Controllers
     public class ProductsController(IInventoryService inventoryService) : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Create(CreateProductDto request)
+        public async Task<ActionResult<ProductDto>> Create(CreateProductCommand command)
         {
             try
             {
-                await inventoryService.CreateNewProduct(request.Barcode, request.Name, request.Category);
-                return Ok("Product is created");
+                var result = await inventoryService.CreateNewProduct(command);
+                return Ok(result);
             }
             catch (InvalidCategoryException ex)
             {
-                return Problem(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
     }
