@@ -7,7 +7,7 @@ namespace NPos.Inventory.Abstraction.Repository
     {
         Task<Product?> GetProductBy(ProductQuery query);
         Task<Product[]> GetProducts();
-        Task SaveProduct(Product product);
+        Task<Product> SaveProduct(Product product);
         Task<ProductCategory?> GetCategoryBy(string name);
     }
 }

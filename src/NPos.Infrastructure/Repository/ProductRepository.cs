@@ -4,6 +4,8 @@ using NPos.Inventory.Abstraction.Repository;
 using NPos.Inventory.Model;
 using NPos.Inventory.Queries;
 
+using ProductEntity = NPos.Infrastructure.Entity.Product;
+
 namespace NPos.Infrastructure.Repository
 {
     public class ProductRepository(NPosContext nPosContext) : IProductRepository
@@ -61,11 +63,10 @@ namespace NPos.Infrastructure.Repository
                 .ToArrayAsync();
         }
 
-        public async Task SaveProduct(Product product)
+        public async Task<Product> SaveProduct(Product product)
         {
-            if (product.Category.Id == default)
-            {
-                nPosContext.Products.Add(new()
+            ProductEntity productEntity = (product.Category.Id == default)
+                ? new()
                 {
                     Barcode = product.Barcode,
                     Name = product.Name,
@@ -73,19 +74,18 @@ namespace NPos.Infrastructure.Repository
                     {
                         Name = product.Category.Name
                     }
-                });
-            }
-            else
-            {
-                nPosContext.Products.Add(new()
+                }
+                : new()
                 {
                     Barcode = product.Barcode,
                     Name = product.Name,
                     CategoryId = product.Category.Id
-                });
-            }
+                };
 
+            nPosContext.Products.Add(productEntity);
             await nPosContext.SaveChangesAsync();
+            product.Id = productEntity.Id;
+            return product;
         }
     }
 }
