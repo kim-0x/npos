@@ -1,4 +1,9 @@
 namespace NPos.WebApi.Models
 {
-    public record ProductModel(string Barcode, string Name, string Category);
+    public record CreateProductRequest()
+    {
+        public required string Barcode { get; init; }
+        public required string Name { get; init; }
+        public required string Category { get; init; }
+    }
 }

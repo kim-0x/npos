@@ -10,21 +10,16 @@ namespace NPos.WebApi.Controllers
     public class ProductsController(IInventoryService inventoryService) : ControllerBase
     {
         [HttpPost]
-        public async Task<IResult> Create(ProductModel productModel)
+        public async Task<IActionResult> Create(CreateProductRequest request)
         {
             try
             {
-                if (productModel is null)
-                {
-                    return Results.BadRequest("Product cannot be null.");
-                }
-
-                await inventoryService.CreateNewProduct(productModel.Barcode, productModel.Name, productModel.Category);
-                return Results.Ok("Product is created");
+                await inventoryService.CreateNewProduct(request.Barcode, request.Name, request.Category);
+                return Ok("Product is created");
             }
             catch (InvalidCategoryException ex)
             {
-                return Results.BadRequest(ex.Message);
+                return Problem(ex.Message);
             }
         }
     }
