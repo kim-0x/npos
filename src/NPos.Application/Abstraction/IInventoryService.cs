@@ -1,6 +1,6 @@
 ﻿using NPos.Inventory.Queries;
 
-namespace NPos.Inventory.Abstraction.Service
+namespace NPos.Application.Abstraction
 {
     public interface IInventoryService
     {

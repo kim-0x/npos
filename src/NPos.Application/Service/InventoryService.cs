@@ -1,5 +1,5 @@
-﻿using NPos.Inventory.Abstraction.Repository;
-using NPos.Inventory.Abstraction.Service;
+﻿using NPos.Application.Abstraction;
+using NPos.Inventory.Abstraction.Repository;
 using NPos.Inventory.Exceptions;
 using NPos.Inventory.Model;
 using NPos.Inventory.Queries;
