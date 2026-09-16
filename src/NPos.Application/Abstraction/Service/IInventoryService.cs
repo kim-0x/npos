@@ -7,7 +7,7 @@ namespace NPos.Application.Abstraction.Service
     public interface IInventoryService
     {
         Task<ProductDto> CreateNewProduct(CreateProductCommand command);
-        Task StockEntry(EntryStockCommand command);
+        Task<StockItemDto> StockEntry(EntryStockCommand command);
         Task<decimal> GetProductCostBy(ProductQuery query);
     }
 }

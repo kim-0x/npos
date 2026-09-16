@@ -14,8 +14,8 @@ namespace NPos.WebApi.Controllers
         {
             try
             {
-                await inventoryService.StockEntry(command);
-                return Ok($"Added {command.Quantity} unit of item {command.Barcode} in stock.");
+                var result = await inventoryService.StockEntry(command);
+                return Ok(result);
             }
             catch (ProductNotFoundException ex)
             {

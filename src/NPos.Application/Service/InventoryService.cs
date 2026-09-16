@@ -47,7 +47,7 @@ namespace NPos.Application.Service
             return await stockItemRepository.GetLatestItemCostById(product.Id);
         }
 
-        public async Task StockEntry(EntryStockCommand command)
+        public async Task<StockItemDto> StockEntry(EntryStockCommand command)
         {
             ProductQuery query = new(null, command.Barcode);
             var product = await productRepository.GetProductBy(query)
@@ -60,7 +60,19 @@ namespace NPos.Application.Service
                 NumberInStock = command.Quantity
             };
 
-            await stockItemRepository.SaveStockItem(stockItem);
+            var result = await stockItemRepository.SaveStockItem(stockItem);
+            var numberInStock = await stockItemRepository.GetCurrentStockLevelByProductId(product.Id);
+            var cost = await stockItemRepository.GetLatestItemCostById(product.Id);
+
+            return new StockItemDto
+            {
+                Id = result.Id,
+                ProductId = result.ProductId,
+                Barcode = product.Barcode,
+                Cost = cost,
+                NumberInStock = numberInStock,
+                CreatedAt = result.CreatedAt
+            };
         }
     }
 }

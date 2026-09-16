@@ -3,13 +3,18 @@ using NPos.Application.Abstraction.Repository;
 using NPos.Infrastructure.Persistence;
 using NPos.Inventory.Model;
 
+using StockItemEntity = NPos.Infrastructure.Entity.StockItem;
+
 namespace NPos.Infrastructure.Repository
 {
     public class StockItemRepository(NPosContext nPosContext) : IStockItemRepository
     {
-        public Task<double> GetCurrentStockLevelByProductId(Guid productId)
+        public async Task<double> GetCurrentStockLevelByProductId(Guid productId)
         {
-            throw new NotImplementedException();
+            return await nPosContext.StockItems
+                .AsNoTracking()
+                .Where(s => s.ProductId == productId)
+                .SumAsync(s => s.NumberInStock);
         }
 
         public async Task<decimal> GetLatestItemCostById(Guid productId)
@@ -28,17 +33,27 @@ namespace NPos.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public async Task SaveStockItem(StockItem stockItem)
+        public async Task<StockItem> SaveStockItem(StockItem stockItem)
         {
-            nPosContext.StockItems.Add(new()
+            StockItemEntity entity = new()
             {
                 ProductId = stockItem.ProductId,
                 NumberInStock = stockItem.NumberInStock,
                 Cost = stockItem.Cost,
                 CreatedAt = DateTime.UtcNow
-            });
+            };
 
+            nPosContext.StockItems.Add(entity);
             await nPosContext.SaveChangesAsync();
+
+            return new StockItem
+            {
+                Id = entity.Id,
+                ProductId = entity.ProductId,
+                NumberInStock = entity.NumberInStock,
+                Cost = entity.Cost,
+                CreatedAt = entity.CreatedAt
+            };
         }
     }
 }
