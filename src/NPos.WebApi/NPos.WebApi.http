@@ -42,3 +42,36 @@ Accept: application/json
   "name": "Cookie Dough Brownies"
 }
 ###
+
+POST {{NPos.WebApi_HostAddress}}/api/inventory/in
+Content-Type: application/json
+Accept: application/json
+
+{
+  "barcode": "012320012347",
+  "cost": 10.25,
+  "quantity": 10
+}
+###
+
+POST {{NPos.WebApi_HostAddress}}/api/inventory/in
+Content-Type: application/json
+Accept: application/json
+
+{
+  "barcode": "051000012347",
+  "cost": 5.0,
+  "quantity": 20
+}
+###
+
+POST {{NPos.WebApi_HostAddress}}/api/inventory/in
+Content-Type: application/json
+Accept: application/json
+
+{
+  "barcode": "180351000399",
+  "cost": 1.0,
+  "quantity": 1
+}
+###

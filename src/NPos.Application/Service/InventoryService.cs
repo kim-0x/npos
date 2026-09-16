@@ -47,17 +47,17 @@ namespace NPos.Application.Service
             return await stockItemRepository.GetLatestItemCostById(product.Id);
         }
 
-        public async Task StockEntry(string barcode, decimal cost, double numberInStock)
+        public async Task StockEntry(EntryStockCommand command)
         {
-            ProductQuery query = new(null, barcode);
+            ProductQuery query = new(null, command.Barcode);
             var product = await productRepository.GetProductBy(query)
                 ?? throw new ProductNotFoundException($"Product with barcode '{query.Barcode}' not found in product catalog.");
 
             StockItem stockItem = new()
             {
                 ProductId = product.Id,
-                Cost = cost,
-                NumberInStock = numberInStock
+                Cost = command.Cost,
+                NumberInStock = command.Quantity
             };
 
             await stockItemRepository.SaveStockItem(stockItem);
