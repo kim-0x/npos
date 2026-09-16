@@ -1,6 +1,6 @@
-namespace NPos.WebApi.Models
+namespace NPos.WebApi.Dtos
 {
-    public record CreateProductRequest()
+    public record CreateProductDto()
     {
         public required string Barcode { get; init; }
         public required string Name { get; init; }

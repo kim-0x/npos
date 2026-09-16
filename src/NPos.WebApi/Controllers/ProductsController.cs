@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NPos.Application.Abstraction;
 using NPos.Inventory.Exceptions;
-using NPos.WebApi.Models;
+using NPos.WebApi.Dtos;
 
 namespace NPos.WebApi.Controllers
 {
@@ -10,7 +10,7 @@ namespace NPos.WebApi.Controllers
     public class ProductsController(IInventoryService inventoryService) : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Create(CreateProductRequest request)
+        public async Task<IActionResult> Create(CreateProductDto request)
         {
             try
             {
