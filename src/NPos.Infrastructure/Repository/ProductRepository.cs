@@ -27,7 +27,7 @@ namespace NPos.Infrastructure.Repository
         {
             return await nPosContext.Products
                  .AsNoTracking()
-                 .Where(p => (query.Id == null || p.Id == query.Id || p.Barcode == query.Barcode))
+                 .Where(p => (p.Id == query.Id || p.Barcode == query.Barcode))
                  .Include(p => p.Category)
                  .Select(p => new Product
                  {
