@@ -39,7 +39,7 @@ namespace NPos.Application.Service
             };
         }
 
-        public async Task<decimal> GetProductCostBy(ProductQuery query)
+        public async Task<decimal> GetProductCostBy(ProductByKeysQuery query)
         {
             var product = await productRepository.GetProductBy(query)
                 ?? throw new ProductNotFoundException($"Product with barcode '{query.Barcode}' not found in product catalog.");
@@ -49,7 +49,7 @@ namespace NPos.Application.Service
 
         public async Task<StockItemDto> StockEntry(EntryStockCommand command)
         {
-            ProductQuery query = new(null, command.Barcode);
+            ProductByKeysQuery query = new(null, command.Barcode);
             var product = await productRepository.GetProductBy(query)
                 ?? throw new ProductNotFoundException($"Product with barcode '{query.Barcode}' not found in product catalog.");
 

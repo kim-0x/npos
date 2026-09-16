@@ -8,6 +8,6 @@ namespace NPos.Application.Abstraction.Service
     {
         Task<ProductDto> CreateNewProduct(CreateProductCommand command);
         Task<StockItemDto> StockEntry(EntryStockCommand command);
-        Task<decimal> GetProductCostBy(ProductQuery query);
+        Task<decimal> GetProductCostBy(ProductByKeysQuery query);
     }
 }

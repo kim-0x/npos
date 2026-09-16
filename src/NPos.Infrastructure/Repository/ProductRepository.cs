@@ -23,7 +23,7 @@ namespace NPos.Infrastructure.Repository
                     .FirstOrDefaultAsync();
         }
 
-        public async Task<Product?> GetProductBy(ProductQuery query)
+        public async Task<Product?> GetProductBy(ProductByKeysQuery query)
         {
             return await nPosContext.Products
                  .AsNoTracking()

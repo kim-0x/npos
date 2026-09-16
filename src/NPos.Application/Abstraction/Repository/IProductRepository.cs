@@ -5,7 +5,7 @@ namespace NPos.Application.Abstraction.Repository
 {
     public interface IProductRepository
     {
-        Task<Product?> GetProductBy(ProductQuery query);
+        Task<Product?> GetProductBy(ProductByKeysQuery query);
         Task<Product[]> GetProducts();
         Task<Product> SaveProduct(Product product);
         Task<ProductCategory?> GetCategoryBy(string name);
